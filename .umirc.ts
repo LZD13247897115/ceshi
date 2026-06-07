@@ -82,6 +82,26 @@ export default defineConfig({
       path: '/file-preview-iframe',
       component: './FilePreviewIframeDemo',
     },
+    /**
+     * 【单文件版 pdf.js】全部逻辑在一个 tsx 里，方便小白阅读
+     * 路径：/file-preview-single-pdfjs
+     * 文件：src/pages/FilePreviewAllInOnePdfJs/index.tsx
+     */
+    {
+      name: '预览单文件 pdf.js',
+      path: '/file-preview-single-pdfjs',
+      component: './FilePreviewAllInOnePdfJs',
+    },
+    /**
+     * 【单文件版 iframe】全部逻辑在一个 tsx 里
+     * 路径：/file-preview-single-iframe
+     * 文件：src/pages/FilePreviewAllInOneIframe/index.tsx
+     */
+    {
+      name: '预览单文件 iframe',
+      path: '/file-preview-single-iframe',
+      component: './FilePreviewAllInOneIframe',
+    },
   ],
   npmClient: 'npm',
   utoopack: {},
