@@ -1,0 +1,55 @@
+.tree-demo-page {
+  padding: 24px;
+  background: #fff;
+  min-height: 100%;
+}
+
+.tree-demo-page-header {
+  margin-bottom: 24px;
+}
+
+/* 只读选择框：外观像 Input，鼠标手型表示可点击 */
+.tree-demo-picker-input {
+  margin-top: 8px;
+  cursor: pointer;
+
+  input {
+    cursor: pointer;
+  }
+}
+
+/* 弹窗内树容器，和 antd 文档 Searchable Tree 类似 */
+.tree-demo-modal-tree {
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  padding: 12px;
+  min-height: 320px;
+  max-height: 420px;
+  overflow: auto;
+}
+
+/* 节点一行：Radio/Checkbox + 文字，点整行可选中 */
+.tree-demo-node-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.tree-demo-node-text {
+  line-height: 24px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 搜索关键词高亮 */
+.tree-demo-search-hit {
+  color: #f50;
+  font-weight: bold;
+}
+
+.tree-demo-result-list {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}

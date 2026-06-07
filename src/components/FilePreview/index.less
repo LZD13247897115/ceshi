@@ -1,0 +1,143 @@
+/**
+ * 【样式说明】FilePreview 组件样式
+ * 类名都以 file-preview- 开头，和 index.tsx 里的 className 对应
+ */
+
+.file-preview {
+  /* ---------- 工具栏区域 ---------- */
+  .file-preview-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: #fafafa;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+  }
+
+  .file-preview-toolbar-meta {
+    white-space: nowrap;
+  }
+
+  /* ---------- 预览区外框（灰色背景） ---------- */
+  .file-preview-viewer {
+    position: relative;
+    min-height: 480px;
+    background: #525659;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  /* 没有内容时的空状态 */
+  .file-preview-viewer-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 480px;
+    background: #fafafa;
+    border: 1px dashed #d9d9d9;
+  }
+
+  .file-preview-viewer-error {
+    margin: 12px;
+  }
+
+  .file-preview-spin-wrapper {
+    display: block;
+    min-height: 480px;
+
+    .ant-spin-container {
+      min-height: 480px;
+    }
+  }
+
+  /* 可滚动的内容区 */
+  .file-preview-viewer-scroll {
+    width: 100%;
+    height: 70vh;
+    min-height: 480px;
+    overflow: auto;
+    padding: 24px;
+  }
+
+  .file-preview-viewer-scroll:not(.file-preview-viewer-scroll-iframe) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ---------- 图片预览 ---------- */
+  .file-preview-stage {
+    display: inline-flex;
+    background: #fff;
+    border-radius: 4px;
+    padding: 8px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 40%);
+  }
+
+  .file-preview-img {
+    display: block;
+    max-width: min(90vw, 960px);
+    max-height: min(70vh, 720px);
+    user-select: none;
+  }
+
+  /* ---------- iframe PDF 预览 ---------- */
+  .file-preview-viewer-scroll-iframe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .file-preview-iframe-stage {
+    width: min(900px, 95%);
+    height: min(70vh, 800px);
+  }
+
+  .file-preview-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 40%);
+  }
+
+  /* ---------- pdf.js 多页 Canvas ---------- */
+  .file-preview-pdf-pages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .file-preview-pdf-page {
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 35%);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .file-preview-pdf-page-label {
+    padding: 6px 12px;
+    font-size: 12px;
+    color: #666;
+    background: #f5f5f5;
+    border-bottom: 1px solid #eee;
+  }
+
+  .file-preview-pdf-canvas {
+    display: block;
+  }
+
+  /* 全屏时撑满屏幕高度 */
+  .file-preview-viewer:fullscreen {
+    .file-preview-viewer-scroll {
+      height: 100vh;
+      min-height: 100%;
+    }
+  }
+}

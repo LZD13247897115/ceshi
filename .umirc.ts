@@ -3,7 +3,7 @@ import { defineConfig } from '@umijs/max';
 export default defineConfig({
   /**
    * pdf.js 依赖的 Worker 文件，构建时复制到输出根目录
-   * 与 src/utils/pdfjsConfig.ts 中的 PDF_WORKER_URL 保持一致
+   * 与 src/components/FilePreview/utils.ts 中的 PDF_WORKER_URL 保持一致
    */
   copy: [
     {
@@ -58,6 +58,29 @@ export default defineConfig({
       name: '图片预览',
       path: '/image-preview',
       component: './ImagePreviewDemo',
+    },
+    /**
+     * 【文件预览 pdf.js 版】
+     * 路径：/file-preview
+     * 页面：src/pages/FilePreviewDemo/index.tsx
+     * 说明：type=fileImage 展示图片，type=filePdf 用 pdf.js 渲染 PDF
+     *       支持链接和 Base64，带左转/右转/放大/缩小/全屏控件
+     */
+    {
+      name: '文件预览 pdf.js',
+      path: '/file-preview',
+      component: './FilePreviewDemo',
+    },
+    /**
+     * 【文件预览 iframe 版】
+     * 路径：/file-preview-iframe
+     * 页面：src/pages/FilePreviewIframeDemo/index.tsx
+     * 说明：和上面一样支持 type 切换，但 PDF 用 iframe 嵌入（实现更简单）
+     */
+    {
+      name: '文件预览 iframe',
+      path: '/file-preview-iframe',
+      component: './FilePreviewIframeDemo',
     },
   ],
   npmClient: 'npm',
