@@ -40,6 +40,11 @@ export default defineConfig({
       component: './Table',
     },
     {
+      name: 'inputTable',
+      path: '/InputTable',
+      component: './inputTable',
+    },
+    {
       name: '产品管理',
       path: '/product',
       component: './ProductTable',
@@ -48,6 +53,29 @@ export default defineConfig({
       name: '树形选择',
       path: '/tree',
       component: './TreeDemo',
+    },
+    /**
+     * 【Tree 组件入门】
+     * 路径：/tree-learn
+     * 页面：src/pages/TreeLearnDemo/index.tsx
+     * 说明：从零学习 antd Tree API（展开、选中、勾选等）
+     */
+    {
+      name: 'Tree 入门',
+      path: '/tree-learn',
+      component: './TreeLearnDemo',
+    },
+    /**
+     * 【自定义表单控件 Demo】
+     * 路径：/custom-form
+     * 入口：src/pages/CustomFormDemo/index.tsx
+     * 结构：components/ hooks/ utils/ constants.ts types.ts columns.tsx
+     * 复用：src/components/TreeFormPicker/（单选/多选树表单控件）
+     */
+    {
+      name: '自定义表单',
+      path: '/custom-form',
+      component: './CustomFormDemo',
     },
     {
       name: 'PDF 预览',

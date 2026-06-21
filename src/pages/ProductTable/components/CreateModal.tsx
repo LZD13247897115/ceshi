@@ -36,7 +36,7 @@ const CreateModal: React.FC<CreateModalProps> = ({
       }}
       width={600}
       modalProps={{
-        destroyOnClose: true,
+        destroyOnHidden: true,
       }}
     >
       <ProFormText

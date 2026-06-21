@@ -104,7 +104,8 @@ function stripPdfBase64Prefix(input: string) {
 function normalizePdfSrc(input: string) {
   const trimmed = trimSrc(input);
   if (!trimmed) return '';
-  if (/^data:application\/pdf/i.test(trimmed) || isHttpUrl(trimmed)) return trimmed;
+  if (/^data:application\/pdf/i.test(trimmed) || isHttpUrl(trimmed))
+    return trimmed;
   return `data:application/pdf;base64,${stripPdfBase64Prefix(trimmed)}`;
 }
 
@@ -129,7 +130,10 @@ function normalizeRotation(deg: number) {
 }
 
 /** 图片和 iframe 的旋转缩放：CSS transform */
-function buildTransformStyle(scale: number, rotation: number): React.CSSProperties {
+function buildTransformStyle(
+  scale: number,
+  rotation: number,
+): React.CSSProperties {
   return {
     transform: `rotate(${rotation}deg) scale(${scale})`,
     transformOrigin: 'center center',
@@ -207,15 +211,18 @@ function usePreviewControls(initialScale = 1, initialRotation = 0) {
     };
   }, []);
 
-  const toggleFullscreen = useCallback(async (container: HTMLElement | null) => {
-    if (!container) return;
-    try {
-      if (isFullscreenActive()) await exitFullscreen();
-      else await requestFullscreen(container);
-    } catch {
-      /* ignore */
-    }
-  }, []);
+  const toggleFullscreen = useCallback(
+    async (container: HTMLElement | null) => {
+      if (!container) return;
+      try {
+        if (isFullscreenActive()) await exitFullscreen();
+        else await requestFullscreen(container);
+      } catch {
+        /* ignore */
+      }
+    },
+    [],
+  );
 
   return {
     scale,
@@ -315,7 +322,10 @@ const ImagePreview: React.FC<{
         </div>
       ) : (
         <div className="fp-single-scroll fp-single-scroll-center">
-          <div className="fp-single-stage" style={buildTransformStyle(scale, rotation)}>
+          <div
+            className="fp-single-stage"
+            style={buildTransformStyle(scale, rotation)}
+          >
             <img
               src={imageSrc}
               alt="预览"
@@ -349,6 +359,7 @@ const PdfIframePreview: React.FC<{
       </div>
     );
   }
+  console.log(pdfSrc);
 
   return (
     <div ref={viewerRef} className="fp-single-viewer">
@@ -408,7 +419,51 @@ const FilePreviewBlock: React.FC<{
 };
 
 // =============================================================================
-// 九、页面入口
+// 九、页面样式（须在组件使用前定义）
+// =============================================================================
+
+const PAGE_STYLES = `
+.fp-single-page { padding: 24px; background: #fff; min-height: 100%; }
+.fp-single-wrap { width: 100%; }
+.fp-single-toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 16px; padding: 12px 16px;
+  background: #fafafa; border: 1px solid #f0f0f0; border-radius: 8px;
+}
+.fp-single-viewer {
+  position: relative; min-height: 480px; background: #525659;
+  border-radius: 8px; overflow: hidden;
+}
+.fp-single-empty {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 480px; background: #fafafa; border: 1px dashed #d9d9d9;
+}
+.fp-single-scroll {
+  width: 100%; height: 70vh; min-height: 480px; overflow: auto; padding: 24px;
+}
+.fp-single-scroll-center {
+  display: flex; align-items: center; justify-content: center;
+}
+.fp-single-stage {
+  display: inline-flex; background: #fff; border-radius: 4px; padding: 8px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+.fp-single-img {
+  display: block; max-width: min(90vw, 960px); max-height: min(70vh, 720px);
+  user-select: none;
+}
+.fp-single-iframe-stage {
+  width: min(900px, 95%); height: min(70vh, 800px);
+}
+.fp-single-iframe {
+  width: 100%; height: 100%; border: none; background: #fff;
+  border-radius: 4px; box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+.fp-single-viewer:fullscreen .fp-single-scroll { height: 100vh; min-height: 100%; }
+`;
+
+// =============================================================================
+// 十、页面入口
 // =============================================================================
 
 const FilePreviewAllInOneIframe: React.FC = () => {
@@ -452,7 +507,9 @@ const FilePreviewAllInOneIframe: React.FC = () => {
       message.warning('请先输入');
       return;
     }
-    setSrc(type === 'fileImage' ? normalizeImageSrc(raw) : stripPdfBase64Prefix(raw));
+    setSrc(
+      type === 'fileImage' ? normalizeImageSrc(raw) : stripPdfBase64Prefix(raw),
+    );
     message.success('已应用');
   };
 
@@ -463,7 +520,8 @@ const FilePreviewAllInOneIframe: React.FC = () => {
       <div className="fp-single-page">
         <Title level={3}>文件预览（单文件 iframe 版）</Title>
         <Text type="secondary">
-          全部代码在本文件 · 访问 /file-preview-single-iframe · 无 pro-components
+          全部代码在本文件 · 访问 /file-preview-single-iframe · 无
+          pro-components
         </Text>
 
         <Alert
@@ -473,29 +531,41 @@ const FilePreviewAllInOneIframe: React.FC = () => {
           message="说明"
           description={
             <Paragraph style={{ marginBottom: 0 }}>
-              PDF 用 <Text code>&lt;iframe&gt;</Text> 嵌入。
-              pdf.js 单文件版见 <Text code>/file-preview-single-pdfjs</Text>。
+              PDF 用 <Text code>&lt;iframe&gt;</Text> 嵌入。 pdf.js 单文件版见{' '}
+              <Text code>/file-preview-single-pdfjs</Text>。
             </Paragraph>
           }
         />
 
         <Card title="数据源" size="small" style={{ marginBottom: 16 }}>
           <Space direction="vertical" style={{ width: '100%' }} size="middle">
-            <Radio.Group value={type} onChange={(e) => handleTypeChange(e.target.value)}>
+            <Radio.Group
+              value={type}
+              onChange={(e) => handleTypeChange(e.target.value)}
+            >
               <Radio.Button value="fileImage">fileImage（图片）</Radio.Button>
               <Radio.Button value="filePdf">filePdf（PDF）</Radio.Button>
             </Radio.Group>
             <Space wrap>
               {type === 'fileImage' ? (
-                <Button icon={<FileImageOutlined />} onClick={() => setSrc(SAMPLE_IMAGE_SRC)}>
+                <Button
+                  icon={<FileImageOutlined />}
+                  onClick={() => setSrc(SAMPLE_IMAGE_SRC)}
+                >
                   示例图片
                 </Button>
               ) : (
                 <>
-                  <Button icon={<FilePdfOutlined />} onClick={() => setSrc(SAMPLE_PDF_BASE64)}>
+                  <Button
+                    icon={<FilePdfOutlined />}
+                    onClick={() => setSrc(SAMPLE_PDF_BASE64)}
+                  >
                     示例 PDF（Base64）
                   </Button>
-                  <Button icon={<LinkOutlined />} onClick={() => setSrc(SAMPLE_PDF_URL)}>
+                  <Button
+                    icon={<LinkOutlined />}
+                    onClick={() => setSrc(SAMPLE_PDF_URL)}
+                  >
                     示例 PDF（链接）
                   </Button>
                 </>
@@ -525,47 +595,3 @@ const FilePreviewAllInOneIframe: React.FC = () => {
 };
 
 export default FilePreviewAllInOneIframe;
-
-// =============================================================================
-// 十、样式
-// =============================================================================
-
-const PAGE_STYLES = `
-.fp-single-page { padding: 24px; background: #fff; min-height: 100%; }
-.fp-single-wrap { width: 100%; }
-.fp-single-toolbar {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-  gap: 12px; margin-bottom: 16px; padding: 12px 16px;
-  background: #fafafa; border: 1px solid #f0f0f0; border-radius: 8px;
-}
-.fp-single-viewer {
-  position: relative; min-height: 480px; background: #525659;
-  border-radius: 8px; overflow: hidden;
-}
-.fp-single-empty {
-  display: flex; align-items: center; justify-content: center;
-  min-height: 480px; background: #fafafa; border: 1px dashed #d9d9d9;
-}
-.fp-single-scroll {
-  width: 100%; height: 70vh; min-height: 480px; overflow: auto; padding: 24px;
-}
-.fp-single-scroll-center {
-  display: flex; align-items: center; justify-content: center;
-}
-.fp-single-stage {
-  display: inline-flex; background: #fff; border-radius: 4px; padding: 8px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-}
-.fp-single-img {
-  display: block; max-width: min(90vw, 960px); max-height: min(70vh, 720px);
-  user-select: none;
-}
-.fp-single-iframe-stage {
-  width: min(900px, 95%); height: min(70vh, 800px);
-}
-.fp-single-iframe {
-  width: 100%; height: 100%; border: none; background: #fff;
-  border-radius: 4px; box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-}
-.fp-single-viewer:fullscreen .fp-single-scroll { height: 100vh; min-height: 100%; }
-`;

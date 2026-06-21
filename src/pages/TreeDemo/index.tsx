@@ -315,7 +315,7 @@ const SingleTreeModal: React.FC<SingleTreeModalProps> = ({
       title="单选树（点击文字或 Radio 选中）"
       open={open}
       width={520}
-      destroyOnClose
+      destroyOnHidden
       onCancel={onCancel}
       onOk={() => onConfirm(tempSelected)}
       okText="确定"
@@ -438,7 +438,7 @@ const MultiTreeModal: React.FC<MultiTreeModalProps> = ({
       title="多选树（点击文字或 Checkbox 勾选）"
       open={open}
       width={520}
-      destroyOnClose
+      destroyOnHidden
       onCancel={onCancel}
       onOk={() => onConfirm(keysToNodes(checkedKeys))}
       okText="确定"

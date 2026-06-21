@@ -38,7 +38,7 @@ const UpdateModal: React.FC<UpdateModalProps> = ({
       initialValues={initialValues}
       width={600}
       modalProps={{
-        destroyOnClose: true,
+        destroyOnHidden: true,
       }}
     >
       <ProFormText name="id" label="产品ID" disabled />
