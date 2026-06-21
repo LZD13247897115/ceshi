@@ -130,6 +130,16 @@ export default defineConfig({
       path: '/file-preview-single-iframe',
       component: './FilePreviewAllInOneIframe',
     },
+    /**
+     * 【PDF 分栏 Demo】左 iframe PDF + 控件，右消息列表
+     * 路径：/pdf-split-demo
+     * 说明：演示正确全屏写法（工具栏与预览区同一全屏容器）
+     */
+    {
+      name: 'PDF 分栏预览',
+      path: '/pdf-split-demo',
+      component: './PdfSplitDemo',
+    },
   ],
   npmClient: 'npm',
   utoopack: {},

@@ -1,0 +1,121 @@
+.pdf-split-demo-page {
+  .pdf-split-demo-layout {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+    min-height: calc(100vh - 180px);
+  }
+
+  .pdf-split-demo-left {
+    flex: 1 1 62%;
+    min-width: 0;
+  }
+
+  .pdf-split-demo-right {
+    flex: 0 0 360px;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* 全屏容器：工具栏 + PDF 都在这里，全屏时一起放大 */
+  .pdf-split-viewer-shell {
+    display: flex;
+    flex-direction: column;
+    background: #525659;
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 560px;
+  }
+
+  .pdf-split-viewer-toolbar-wrap {
+    flex-shrink: 0;
+    padding: 12px 12px 0;
+    background: #fafafa;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .pdf-split-viewer-scroll {
+    flex: 1;
+    overflow: auto;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 480px;
+  }
+
+  .pdf-split-iframe-stage {
+    width: min(900px, 95%);
+    height: min(65vh, 720px);
+    transition: transform 0.2s ease;
+  }
+
+  .pdf-split-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 40%);
+  }
+
+  /*
+   * 全屏样式（关键修复）
+   * 1. 必须写 :fullscreen 和 :-webkit-full-screen（Chrome/Safari）
+   * 2. 全屏后要撑满视口，scroll 区 flex:1 才能占满剩余高度
+   */
+  .pdfviewer-shell:fullscreen,
+  .pdf-split-viewer-shell:-webkit-full-screen {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    background: #525659;
+
+    .pdf-split-viewer-scroll {
+      flex: 1;
+      min-height: 0;
+      height: auto;
+    }
+
+    .pdf-split-iframe-stage {
+      width: min(1200px, 92vw);
+      height: min(88vh, 900px);
+    }
+  }
+
+  .pdf-split-message-list {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pdf-split-message-card {
+    cursor: pointer;
+    transition: border-color 0.2s;
+
+    &.active {
+      border-color: #1677ff;
+    }
+  }
+
+  .pdf-split-message-detail {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 992px) {
+  .pdf-split-demo-page {
+    .pdf-split-demo-layout {
+      flex-direction: column;
+    }
+
+    .pdf-split-demo-right {
+      flex: 1 1 auto;
+      max-width: none;
+    }
+  }
+}
