@@ -20,9 +20,12 @@
  *       filterTableData.ts   表单条件过滤
  *
  *   components/TreeFormPicker/   可复用的树形表单控件（跨页面）
- *     TreeSinglePicker.tsx
- *     TreeMultiPicker.tsx
+ *     TreeSinglePicker.tsx      表单 Input（点击打开弹窗）
+ *     TreeMultiPicker.tsx       表单 Input（点击打开弹窗）
+ *     TreePickerModal.tsx       树形选择弹窗（与表单分离）
  *     types.ts / utils.ts
+ *
+ *   联动：区域（多选）选了 → 部门（单选）才可点击
  */
 import { Form, Typography } from 'antd';
 import React from 'react';

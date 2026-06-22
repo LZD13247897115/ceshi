@@ -49,7 +49,7 @@ export function useCustomFormList(form: FormInstance<FormValues>) {
    * handleSubmit —— 点击「查询」按钮
    *
    * 流程：
-   *   1. form.validateFields() 收集并校验表单（username / department / regions）
+   *   1. form.validateFields() 收集并校验表单（username / regions / department）
    *   2. setLoading(true) 显示 loading
    *   3. setTimeout 模拟接口延迟 QUERY_DELAY_MS
    *   4. filterTableData(values) 按条件过滤 mock 数据

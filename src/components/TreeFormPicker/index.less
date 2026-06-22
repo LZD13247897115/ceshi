@@ -1,5 +1,13 @@
-.tree-form-picker-input {
+.tree-form-picker-input:not([disabled]) {
   cursor: pointer;
+}
+
+.tree-form-picker-wrap.is-disabled {
+  cursor: not-allowed;
+
+  .tree-form-picker-input[disabled] {
+    pointer-events: none;
+  }
 }
 
 .tree-form-picker-modal-tree {

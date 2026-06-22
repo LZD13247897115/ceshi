@@ -15,9 +15,11 @@
     "@ant-design/pro-components": "^2.4.4",
     "@umijs/max": "^4.6.57",
     "antd": "^5.4.0",
+    "moment": "^2.30.1",
     "pdfjs-dist": "^6.0.227"
   },
   "devDependencies": {
+    "@types/moment": "^2.11.29",
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
     "husky": "^9",

@@ -140,6 +140,16 @@ export default defineConfig({
       path: '/pdf-split-demo',
       component: './PdfSplitDemo',
     },
+    /**
+     * 【DatePicker 回填 Demo】
+     * 路径：/date-picker
+     * 说明：模拟接口 string 日期 "2026-02-13"，用 moment 解析/格式化后回填 DatePicker
+     */
+    {
+      name: 'DatePicker 回填',
+      path: '/date-picker',
+      component: './DatePickerDemo',
+    },
   ],
   npmClient: 'npm',
   utoopack: {},

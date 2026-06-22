@@ -4,6 +4,18 @@ export interface TreeNodeValue {
   title: string;
 }
 
+/** 树形选择弹窗 props（Modal 与 Input 分离） */
+export interface TreePickerModalProps {
+  open: boolean;
+  mode: 'single' | 'multiple';
+  title: string;
+  treeData: import('antd').TreeDataNode[];
+  singleValue?: TreeNodeValue | null;
+  multiValue?: TreeNodeValue[];
+  onConfirm: (value: TreeNodeValue | null | TreeNodeValue[]) => void;
+  onCancel: () => void;
+}
+
 /** 单选树自定义表单控件 props（value / onChange 由 Form.Item 注入） */
 export interface TreeSinglePickerProps {
   value?: TreeNodeValue | null;
@@ -11,6 +23,10 @@ export interface TreeSinglePickerProps {
   treeData: import('antd').TreeDataNode[];
   placeholder?: string;
   modalTitle?: string;
+  /** 为 true 时不可点击打开弹窗（如：需先完成多选） */
+  disabled?: boolean;
+  /** 禁用时点击的提示文案 */
+  disabledTip?: string;
 }
 
 /** 多选树自定义表单控件 props */
@@ -20,4 +36,8 @@ export interface TreeMultiPickerProps {
   treeData: import('antd').TreeDataNode[];
   placeholder?: string;
   modalTitle?: string;
+  /** 为 true 时不可点击打开弹窗 */
+  disabled?: boolean;
+  /** 禁用时点击的提示文案 */
+  disabledTip?: string;
 }
